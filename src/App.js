@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { UserContextProvider } from "./context/User";
+import { FriendsContextProvider } from "./context/Friends";
 
-function App() {
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import Friends from "./pages/Friends";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <UserContextProvider>
+      <FriendsContextProvider>
+        <Routes>
+          <Route path={"/profile"} element={<Profile />}/>
+          <Route path={"/"} element={<Login />}/>
+          <Route path={"/friends"} element={<Friends/>}/>
+        </Routes>
+      </FriendsContextProvider>
+      </UserContextProvider>
+    </BrowserRouter>
+  )
 }
-
+  
 export default App;
